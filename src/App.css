@@ -1,0 +1,43 @@
+.header {
+  position: fixed;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  padding: 20px 0;
+  background-color: rgba(0, 0, 0, 0.39);
+}
+
+.title {
+  width: 50vw;
+}
+.place {
+  width: 50vw;
+}
+
+.weatherBoard {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  background-image: url(/images/weather.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.weatherInfo {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.39);
+}
+
+.paris {
+  background-image: url(/images/france.jpg);
+}
+.tokyo {
+  background-image: url(/images/tokyo.jpg);
+}
+.vancouver {
+  background-image: url(/images/vancouver.jpg);
+}
