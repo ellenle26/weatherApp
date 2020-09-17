@@ -1,14 +1,23 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudSun } from "@fortawesome/free-solid-svg-icons";
+import BarLoader from "react-spinners/ClipLoader";
+import { css } from "@emotion/core";
 import "./App.css";
 
+const override = css`
+  display: block;
+  margin: auto;
+  border-color: red;
+`;
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       weatherData: null,
+      loading: true,
+      city: "",
     };
   }
 
@@ -22,7 +31,7 @@ export default class App extends Component {
     }
     let response = await fetch(url);
     let data = await response.json();
-    this.setState({ weatherData: data });
+    this.setState({ weatherData: data, loading: false });
     console.log(data);
   };
 
@@ -37,8 +46,17 @@ export default class App extends Component {
   };
 
   render() {
-    if (!this.state.weatherData) {
-      return <div>Loading</div>;
+    if (this.state.loading) {
+      return (
+        <div>
+          <BarLoader
+            css={override}
+            size={150}
+            color={"#123abc"}
+            loading={this.state.loading}
+          />
+        </div>
+      );
     }
     return (
       <div>
@@ -48,6 +66,16 @@ export default class App extends Component {
             WEATHER
           </div>
           <div className="place">
+            <input
+              type="text"
+              onChange={(event) =>
+                this.setState({ ...this.state, city: event.target.value })
+              }
+            />{" "}
+            <button onClick={() => this.getWeather("", "", this.state.city)}>
+              Search
+            </button>{" "}
+            &nbsp;
             <button onClick={() => this.getWeather("", "", "paris")}>
               Paris
             </button>
